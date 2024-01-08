@@ -5,11 +5,11 @@ RSpec.describe "User Rounds Show" do
     load_test_data
   end
   
-  it "Get request for /users/:user_id/rounds/:round_id (info: round name(date), target weather data, voted (true false), vote content)" do
+  it "Get request for /users/:user_id/rounds/:round_id (info: round name(date), target weather data, voted (true false), vote content)", :vcr do
     get "/api/v0/users/#{@user1.id}/rounds/#{@round1.id}"
 
     expect(response).to be_successful
-    puts "Response Status: #{response.status}"
+    # puts "Response Status: #{response.status}"
     json_response = JSON.parse(response.body)
     #binding.pry
     expect(json_response['data']['id']).to eq(@round1.id.to_s)
